@@ -1,0 +1,26 @@
+<%= form_for @mood, url: {action: "create"} do |f| %>
+  <% if @mood.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mood.errors.count, "error") %> prohibited this mood from being saved:</h2>
+
+      <ul>
+      <% @mood.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <i id="happy" class="icon-smile state"></i>
+  <i id="indifferent" class="icon-meh state"></i>
+  <i id="sad" class="icon-frown state"></i>
+
+  <%= f.hidden_field :state %>
+  <!--div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div-->
+<% end %>
