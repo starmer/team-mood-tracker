@@ -1,5 +1,12 @@
 class MoodController < ApplicationController
 
+  before_action :set_cookie
+
+  def set_cookie
+    cookies.permanent[:token] = UUID.new.generate unless cookies[:token]
+    @token = cookies[:token]
+  end
+
   def mood_params
     params.require(:mood).permit(:state)
   end
@@ -17,8 +24,9 @@ class MoodController < ApplicationController
   end
 
   def create
-    @mood = Mood.new(mood_params)
-
+    mood_tmp = mood_params.to_hash.merge(cookie: @token)
+    @mood = Mood.new(mood_tmp)
+ 
     if @mood.save
       redirect_to "/mood/overall"
     else

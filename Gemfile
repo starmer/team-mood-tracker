@@ -46,3 +46,5 @@ end
 
 gem "less-rails" 
 gem 'twitter-bootstrap-rails'
+
+gem 'uuid'
