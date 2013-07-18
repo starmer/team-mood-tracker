@@ -1,8 +1,9 @@
 // Place all the styles related to the mood controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.state {
-	margin-right:0.1em;
+div.state {
+	margin-right:1em;
+  float:left;
 }
 
 .centered {
@@ -14,4 +15,5 @@
   left: 0;
   right: 0;
   margin: auto;
+  padding-left:1em;
  }

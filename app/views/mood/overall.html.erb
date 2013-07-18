@@ -1,5 +1,12 @@
-<% @moods.each do |mood| %>
-  <%= mood.state %>
-<% end %>
-
-<%= @moods_hash %>
+<div class="state">
+  <i id="happy" class="icon-smile"></i>
+  <div><%= @moods_hash['happy'] %></div>
+</div>
+<div class="state">
+  <i id="indifferent" class="icon-meh"></i>
+  <div><%= @moods_hash['indifferent'] %></div>
+</div>
+<div class="state">
+  <i id="sad" class="icon-frown"></i>
+  <div><%= @moods_hash['sad'] %></div>
+</div>
