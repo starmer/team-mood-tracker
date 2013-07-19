@@ -27,11 +27,31 @@ class MoodController < ApplicationController
     mood_tmp = mood_params.to_hash.merge(cookie: @token)
     @mood = Mood.new(mood_tmp)
  
-    if @mood.save
-      redirect_to "/mood/overall"
+    respond_to do |format|
+      if @mood.save
+        format.html { redirect_to "/thanks/#{@mood.id}" }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @mood.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def thanks
+    @mood = Mood.find(params[:id])
+  end
+
+  def update
+
+    @mood = Mood.find(params[:mood][:id])
+    @mood.notes = params[:mood][:notes]
+
+    
+    if @mood.save()
+      redirect_to '/overall'
     else
       respond_to do |format|
-        format.html { render action: 'new' }
+        format.html { render action: 'thanks' }
       end
     end
   end

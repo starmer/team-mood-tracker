@@ -1,11 +1,11 @@
-NikoNiko::Application.routes.draw do
+Niko::Application.routes.draw do
 
-  get 'mood/', to: 'mood#new'
-  post 'mood/', to: 'mood#create'
+  get '/', to: 'mood#new'
+  post '/', to: 'mood#create'
+  get '/thanks/:id', to:'mood#thanks'
+  patch '/update', to:'mood#update'
 
-  get "mood/overall"
-  get "mood/stats"
-  get "mood/notes"
+  get "/overall", to:'mood#overall'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-NikoNiko::Application.load_tasks
+Niko::Application.load_tasks

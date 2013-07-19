@@ -1,0 +1,25 @@
+<div class="centered">
+<h1>How come?</h1>
+
+<%= form_for @mood, url: {action: "update"} do |f| %>
+  <% if @mood.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mood.errors.count, "error") %> prohibited this mood from being saved:</h2>
+
+      <ul>
+      <% @mood.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :id %>
+  <div class="field">
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Done", :class => "btn btn-info" %>
+  </div>
+<% end %>
+</div>
