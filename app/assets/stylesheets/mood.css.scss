@@ -1,6 +1,10 @@
 // Place all the styles related to the mood controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h1.mood_question{
+  margin-right:1em;
+}
+
 a.state, div.state{
 	margin-right:1em;
   float:left;
