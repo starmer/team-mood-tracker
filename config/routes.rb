@@ -6,6 +6,7 @@ Niko::Application.routes.draw do
   patch '/update', to:'mood#update'
 
   get "/overall", to:'mood#overall'
+  get "/notes", to:'mood#notes'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

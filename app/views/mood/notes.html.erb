@@ -1,2 +1,21 @@
-<h1>Mood#notes</h1>
-<p>Find me in app/views/mood/notes.html.erb</p>
+<div class="centered">
+<table class="table table-striped table-bordered notes">
+<% @moods.each do |mood| %>
+  <tr>
+    <td class="icon">
+      <% case mood.state
+         when "happy" %>
+         <i id="happy" class="icon-smile icon-5x"></i>
+      <% when "indifferent"%>
+         <i id="indifferent" class="icon-meh icon-5x"></i>
+      <% when "sad" %>
+         <i id="sad" class="icon-frown icon-5x"></i>
+      <% end %>
+    </td>
+    <td>
+      <%= mood.notes %>
+    </td>
+  </tr>
+<% end %>
+</table>
+</div>

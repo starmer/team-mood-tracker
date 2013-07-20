@@ -39,6 +39,9 @@ class MoodController < ApplicationController
 
   def thanks
     @mood = Mood.find(params[:id])
+    if @mood.cookie != cookies[:token]
+      redirect_to "/"
+    end
   end
 
   def update
@@ -46,7 +49,6 @@ class MoodController < ApplicationController
     @mood = Mood.find(params[:mood][:id])
     @mood.notes = params[:mood][:notes]
 
-    
     if @mood.save()
       redirect_to '/overall'
     else
@@ -60,5 +62,6 @@ class MoodController < ApplicationController
   end
 
   def notes
+    @moods = Mood.where.not(notes: nil, notes: '')
   end
 end
