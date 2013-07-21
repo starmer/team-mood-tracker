@@ -1,16 +1,5 @@
 <%= form_for @mood, url: {action: "create"} do |f| %>
-  <% if @mood.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@mood.errors.count, "error") %> prohibited this mood from being saved:</h2>
-
-      <ul>
-      <% @mood.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= render 'form_errors' %>
 <a class="state">
   <i id="happy" class="icon-smile"></i>
 </a>

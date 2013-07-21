@@ -2,10 +2,10 @@ Niko::Application.routes.draw do
 
   get '/', to: 'mood#new'
   post '/', to: 'mood#create'
-  get '/thanks/:id', to:'mood#thanks'
+  get '/add_note/:id', to:'mood#add_note'
   patch '/update', to:'mood#update'
 
-  get "/overall", to:'mood#overall'
+  get "/summary", to:'mood#summary'
   get "/notes", to:'mood#notes'
 
   # The priority is based upon order of creation: first created -> highest priority.

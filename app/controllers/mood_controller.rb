@@ -11,7 +11,7 @@ class MoodController < ApplicationController
     params.require(:mood).permit(:state)
   end
 
-  def overall
+  def summary
     @moods = Mood.all
     @moods_hash = @moods.inject(Hash.new(0)) do |result, element|
       result[element.state] += 1
@@ -29,7 +29,7 @@ class MoodController < ApplicationController
  
     respond_to do |format|
       if @mood.save
-        format.html { redirect_to "/thanks/#{@mood.id}" }
+        format.html { redirect_to "/add_note/#{@mood.id}" }
       else
         format.html { render action: 'new' }
         format.json { render json: @mood.errors, status: :unprocessable_entity }
@@ -37,7 +37,7 @@ class MoodController < ApplicationController
     end
   end
 
-  def thanks
+  def add_note
     @mood = Mood.find(params[:id])
     if @mood.cookie != cookies[:token]
       redirect_to "/"
@@ -45,15 +45,14 @@ class MoodController < ApplicationController
   end
 
   def update
-
     @mood = Mood.find(params[:mood][:id])
     @mood.notes = params[:mood][:notes]
 
     if @mood.save()
-      redirect_to '/overall'
+      redirect_to '/summary'
     else
       respond_to do |format|
-        format.html { render action: 'thanks' }
+        format.html { render action: 'add_note' }
       end
     end
   end

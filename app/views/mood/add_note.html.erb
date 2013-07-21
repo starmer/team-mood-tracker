@@ -1,0 +1,15 @@
+<div class="centered">
+<h1>How come?</h1>
+
+<%= form_for @mood, url: {action: "update"} do |f| %>
+<%= render 'form_errors' %>
+
+  <%= f.hidden_field :id %>
+  <div class="field">
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Done", :class => "btn btn-info" %>
+  </div>
+<% end %>
+</div>

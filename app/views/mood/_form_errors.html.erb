@@ -1,0 +1,12 @@
+  <% if @mood.errors.any? %>
+  <div class="alert alert-error">
+    <div id="error_explanation">
+      <p><%= pluralize(@mood.errors.count, "error") %> prohibited this mood from being saved:</p>
+      <ul>
+      <% @mood.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>
