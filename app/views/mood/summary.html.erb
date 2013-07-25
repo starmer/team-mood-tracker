@@ -22,9 +22,9 @@ function drawChart() {
       var tmp = [];
       var key = rawChartDataKeys[i];
       tmp[0] = key;
-      tmp[1] = rawChartData[key]['happy'];
-      tmp[2] = rawChartData[key]['indifferent'];
-      tmp[3] = rawChartData[key]['sad'];
+      tmp[1] = rawChartData[key]['happy'] ? rawChartData[key]['happy'] : 0;
+      tmp[2] = rawChartData[key]['indifferent'] ? rawChartData[key]['indifferent'] : 0;
+      tmp[3] = rawChartData[key]['sad'] ? rawChartData[key]['sad'] : 0;
 
       chartData.push(tmp);
     }
