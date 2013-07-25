@@ -13,10 +13,20 @@ class MoodController < ApplicationController
 
   def summary
     @moods = Mood.all
-    @moods_hash = @moods.inject(Hash.new(0)) do |result, element|
-      result[element.state] += 1
-      result
+    # @moods_hash = @moods.inject(Hash.new(0)) do |result, element|
+    #   result[element.state] += 1
+    #   result
+    # end
+
+    @grouped_moods = Hash.new { |hash, key| hash[key] = Hash.new(0) }
+
+    @moods.each do |mood|
+      date = mood.created_at.to_date
+      state = mood.state
+      @grouped_moods[date][state] += 1
     end
+
+    @grouped_moods
   end
 
   def new

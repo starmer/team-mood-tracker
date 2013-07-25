@@ -1,14 +1,26 @@
-<div class="centered">
-  <div class="state">
-    <h1><%= @moods_hash['happy'] %></h1>
-    <i id="happy" class="icon-smile"></i>
-  </div>
-  <div class="state">
-    <h1><%= @moods_hash['indifferent'] %></h1>
-    <i id="indifferent" class="icon-meh"></i>
-  </div>
-  <div class="state">
-    <h1><%= @moods_hash['sad'] %></h1>
-    <i id="sad" class="icon-frown"></i>
-  </div>
-</div>
+<h1>Summary</h1>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Date', 'Happy',   'Meh',   'Sad'],
+    <% @grouped_moods.each do |element| %>
+    ['<%=element[0]%>', <%=element[1]['happy']%>, <%=element[1]['indifferent']%>, <%=element[1]['sad']%>],
+    <% end %>
+  ]);
+
+  var options = {
+    isStacked: true,
+    hAxis: {title: 'Date'},
+    series: {0:{color:'#009900'}, 1:{color: '#FF9900'}, 2:{color: '#CC0000'}}
+  };
+
+  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+</script>
+
