@@ -68,7 +68,10 @@ class MoodController < ApplicationController
 
   def update
     @mood = Mood.find(params[:mood][:id])
-    @mood.notes = params[:mood][:notes]
+    
+    if params[:mood][:notes] != "(Optional)"
+      @mood.notes = params[:mood][:notes]
+    end
 
     if @mood.save()
       redirect_to '/summary'
