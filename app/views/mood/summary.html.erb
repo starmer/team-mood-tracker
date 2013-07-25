@@ -1,21 +1,38 @@
 <h1>Summary</h1>
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
-
+<input id="start_date" value="<%=@start_date%>">
+<input id="end_date" value="<%=@end_date%>">
+<a id="permalink" href="?start_date=<%=@start_date%>&end_date=<%=@end_date%>">link</a>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
+
+var rawChartData = <%=@grouped_moods.to_json.html_safe%>;
+var rawChartDataKeys = <%=@grouped_moods.keys.to_json.html_safe%>;
+
 function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Date', 'Happy',   'Meh',   'Sad'],
-    <% @grouped_moods.each do |element| %>
-    ['<%=element[0]%>', <%=element[1]['happy']%>, <%=element[1]['indifferent']%>, <%=element[1]['sad']%>],
-    <% end %>
-  ]);
+  var chartData = [
+      ['Date', 'Happy', 'Meh', 'Sad']
+    ];
+
+    var startIndex = rawChartDataKeys.indexOf($('#start_date').val())
+    var endIndex = rawChartDataKeys.indexOf($('#end_date').val())
+    for(var i = startIndex ; i <= endIndex; i++) {
+      var tmp = [];
+      var key = rawChartDataKeys[i];
+      tmp[0] = key;
+      tmp[1] = rawChartData[key]['happy'];
+      tmp[2] = rawChartData[key]['indifferent'];
+      tmp[3] = rawChartData[key]['sad'];
+
+      chartData.push(tmp);
+    }
+
+  var data = google.visualization.arrayToDataTable(chartData);
 
   var options = {
     isStacked: true,
-    hAxis: {title: 'Date'},
     series: {0:{color:'#009900'}, 1:{color: '#FF9900'}, 2:{color: '#CC0000'}}
   };
 

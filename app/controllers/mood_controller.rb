@@ -26,6 +26,18 @@ class MoodController < ApplicationController
       @grouped_moods[date][state] += 1
     end
 
+    if(params[:start_date] && @grouped_moods.keys.include?(Date.parse(params[:start_date])))
+      @start_date = params[:start_date]
+    else
+      @start_date = @grouped_moods.keys.first
+    end
+
+    if(params[:end_date] && @grouped_moods.keys.include?(Date.parse(params[:end_date])))
+      @end_date = params[:end_date]
+    else
+      @end_date = @grouped_moods.keys.last
+    end
+
     @grouped_moods
   end
 
