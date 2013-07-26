@@ -35,3 +35,23 @@ a.state, div.state{
   width:700px;
   height:500px;
  }
+
+ #chart_container{
+  margin:auto;
+  width:700px;
+  height:300px;
+ }
+
+ #chart_controls{
+  margin-top:20px;
+  font-weight:bold;
+ }
+
+ #chart_controls input {
+  margin-right:10px;
+ }
+
+ #notes_table{
+  max-width:500px;
+  margin:auto;
+ }

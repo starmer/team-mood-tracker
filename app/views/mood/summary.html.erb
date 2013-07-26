@@ -1,15 +1,24 @@
 <h1>Summary</h1>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
-<input id="start_date" value="<%=@start_date%>">
-<input id="end_date" value="<%=@end_date%>">
-<a id="permalink" href="?start_date=<%=@start_date%>&end_date=<%=@end_date%>">link</a>
+<div id="chart_controls">
+Start: <input id="start_date" value="<%=@start_date%>">
+End: <input id="end_date" value="<%=@end_date%>">
+<a id="permalink" href="?start_date=<%=@start_date%>&end_date=<%=@end_date%>"><i class="icon-link"></i></a>
+</div>
+
+<div id="chart_container"></div>
+
+<table id="notes_table" class="table table-striped table-bordered notes">
+</table>
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
 
+var rawMoodData = <%=@notes_hash.to_json.html_safe%>;
 var rawChartData = <%=@grouped_moods.to_json.html_safe%>;
 var rawChartDataKeys = <%=@grouped_moods.keys.to_json.html_safe%>;
+
 
 function drawChart() {
   var chartData = [
@@ -36,7 +45,7 @@ function drawChart() {
     series: {0:{color:'#009900'}, 1:{color: '#FF9900'}, 2:{color: '#CC0000'}}
   };
 
-  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('chart_container'));
   chart.draw(data, options);
 }
 </script>

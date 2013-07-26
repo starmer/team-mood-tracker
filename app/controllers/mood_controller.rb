@@ -1,3 +1,5 @@
+require 'rack/utils'
+
 class MoodController < ApplicationController
 
   before_action :set_cookie
@@ -13,10 +15,15 @@ class MoodController < ApplicationController
 
   def summary
     @moods = Mood.all
-    # @moods_hash = @moods.inject(Hash.new(0)) do |result, element|
-    #   result[element.state] += 1
-    #   result
-    # end
+
+    initial_hash = Hash.new { |hash, key| hash[key] = [] }
+
+    @notes_hash = @moods.inject(initial_hash) do |result, element|
+      result[element.created_at.to_date.to_s] << {:state => element.state, :notes => Rack::Utils.escape_html(element.notes)}
+      result
+    end
+    
+    puts "notes hash: #{@notes_hash}"
 
     @grouped_moods = Hash.new { |hash, key| hash[key] = Hash.new(0) }
 
@@ -26,19 +33,23 @@ class MoodController < ApplicationController
       @grouped_moods[date][state] += 1
     end
 
-    if(params[:start_date] && @grouped_moods.keys.include?(Date.parse(params[:start_date])))
-      @start_date = params[:start_date]
-    else
-      @start_date = @grouped_moods.keys.first
-    end
-
-    if(params[:end_date] && @grouped_moods.keys.include?(Date.parse(params[:end_date])))
-      @end_date = params[:end_date]
-    else
-      @end_date = @grouped_moods.keys.last
-    end
+    setup_start_and_end_dates @grouped_moods
 
     @grouped_moods
+  end
+
+  def setup_start_and_end_dates grouped_moods
+    if(params[:start_date] && grouped_moods.keys.include?(Date.parse(params[:start_date])))
+      @start_date = params[:start_date]
+    else
+      @start_date = grouped_moods.keys.first
+    end
+
+    if(params[:end_date] && grouped_moods.keys.include?(Date.parse(params[:end_date])))
+      @end_date = params[:end_date]
+    else
+      @end_date = grouped_moods.keys.last
+    end
   end
 
   def new

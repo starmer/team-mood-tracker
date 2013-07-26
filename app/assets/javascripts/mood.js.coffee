@@ -14,5 +14,31 @@ $ ->
     unless rawChartDataKeys.indexOf($(this).val()) is -1
       drawChart()
       $("#permalink")[0].href = "?start_date=" + $("#start_date").val() + "&end_date=" + $("#end_date").val()
+      renderNotes()
 
+  renderNotes();
 
+renderNotes = ->
+  $("#notes_table").html ""
+  startIndex = rawChartDataKeys.indexOf($("#start_date").val())
+  endIndex = rawChartDataKeys.indexOf($("#end_date").val())
+  i = startIndex
+
+  while i <= endIndex
+    tmp = []
+    moodsByDate = rawMoodData[rawChartDataKeys[i]]
+    j = 0
+
+    while j < moodsByDate.length
+      mood = moodsByDate[j]
+      $("#notes_table").append "<tr><td class=\"icon\"><i class=\"icon-" + getIcon(mood.state) + " icon-5x\"></i></td><td>" + mood.notes + "</td></tr>"  if mood.notes
+      j++
+    i++
+    
+getIcon = (state) ->
+  icons =
+    happy: "smile"
+    indifferent: "meh"
+    sad: "frown"
+
+  icons[state]
