@@ -27,31 +27,40 @@ a.state, div.state{
   padding-left:1em;
  }
 
- .notes td.icon {
+.notes td.icon {
   text-align:center;
- }
+}
 
- .charts {
+.charts {
   width:700px;
   height:500px;
- }
+}
 
- #chart_container{
+#chart_container{
   margin:auto;
   width:700px;
   height:300px;
- }
+}
 
- #chart_controls{
+#chart_controls{
   margin-top:20px;
   font-weight:bold;
- }
+}
 
- #chart_controls input {
-  margin-right:10px;
- }
+#chart_controls input {
+margin-right:10px;
+}
 
- #notes_table{
+#notes_table{
   max-width:500px;
   margin:auto;
- }
+  margin-bottom:50px;
+}
+
+#notes_table td {
+  vertical-align:middle;
+}
+
+#notes_table td.date {
+  text-align:center;
+}

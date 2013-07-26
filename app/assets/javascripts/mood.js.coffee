@@ -31,10 +31,10 @@ renderNotes = ->
 
     while j < moodsByDate.length
       mood = moodsByDate[j]
-      $("#notes_table").append "<tr><td class=\"icon\"><i class=\"icon-" + getIcon(mood.state) + " icon-5x\"></i></td><td>" + mood.notes + "</td></tr>"  if mood.notes
+      $("#notes_table").append "<tr><td class=\"icon\"><i class=\"icon-" + getIcon(mood.state) + " icon-3x\"></i></td><td>" + mood.notes + "</td><td class=\"date\">" + rawChartDataKeys[i] + "</td></tr>"  if mood.notes
       j++
     i++
-    
+
 getIcon = (state) ->
   icons =
     happy: "smile"
