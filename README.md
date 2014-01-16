@@ -13,3 +13,7 @@ This project was developed using Ruby 2.0 and Rails 4. Assuming both of those ar
 * run rake db:migrate
 * rails s
 * go to http://localhost:3000
+* 
+## License
+
+Niko is released under the [MIT License](http://www.opensource.org/licenses/MIT).
